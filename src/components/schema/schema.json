@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_schema_schemata",
+  "info": {
+    "displayName": "Schema"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "RatingValue": {
+      "type": "decimal"
+    },
+    "RatingCount": {
+      "type": "decimal"
+    },
+    "ReviewCount": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}
