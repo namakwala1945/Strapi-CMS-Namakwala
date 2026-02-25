@@ -525,6 +525,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   attributes: {
     AuthorName: Schema.Attribute.String;
     content: Schema.Attribute.Blocks;
+    country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
     CoverImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
@@ -689,6 +690,38 @@ export interface ApiContactContact extends Struct.SingleTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     WorkingTime: Schema.Attribute.String;
+  };
+}
+
+export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
+  collectionName: 'countries';
+  info: {
+    displayName: 'Country';
+    pluralName: 'countries';
+    singularName: 'country';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::country.country'
+    > &
+      Schema.Attribute.Private;
+    Name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    SEODescription: Schema.Attribute.String;
+    SeoTitle: Schema.Attribute.String;
+    Slug: Schema.Attribute.UID<'Name'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -2049,6 +2082,7 @@ declare module '@strapi/strapi' {
       'api::certifications-section.certifications-section': ApiCertificationsSectionCertificationsSection;
       'api::common-section.common-section': ApiCommonSectionCommonSection;
       'api::contact.contact': ApiContactContact;
+      'api::country.country': ApiCountryCountry;
       'api::default-description.default-description': ApiDefaultDescriptionDefaultDescription;
       'api::export-terms-and-condition.export-terms-and-condition': ApiExportTermsAndConditionExportTermsAndCondition;
       'api::faq.faq': ApiFaqFaq;

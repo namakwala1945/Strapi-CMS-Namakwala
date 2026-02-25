@@ -54,6 +54,12 @@
     },
     "PublishedDate": {
       "type": "datetime"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "blogs"
     }
   }
 }
